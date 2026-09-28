@@ -3,7 +3,7 @@
 Acates Visio — o retrato local da migração SAJ → SEEU: quadro geral e mapa
 judiciário montados a partir dos arquivos que a equipe distribui.
 
-Versão distribuída: 0.10.0
+Versão distribuída: 0.11.0
 
 ## Como instalar
 

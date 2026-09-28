@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Acates Visio",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "description": "Acates Visio: leitura local dos arquivos que a equipe de migração SAJ→SEEU distribui (lotes, logs, acervo, planilhas) — quadro geral e mapa judiciário. Não acessa rede nenhuma; nunca apaga arquivos locais.",
   "icons": {
     "16": "icons/icon16.png",
