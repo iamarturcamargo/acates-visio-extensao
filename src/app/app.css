@@ -699,6 +699,17 @@ main {
   font-weight: 500;
 }
 
+
+
+
+.combobox-option.combobox-acao {
+  border-top: 1px solid var(--line);
+  color: var(--brand);
+  font-weight: 500;
+  margin-top: 4px;
+  padding-top: 8px;
+}
+
 .combobox-option.combobox-empty {
   color: var(--muted);
   cursor: default;
@@ -1757,6 +1768,15 @@ input.filtro-ativo:focus {
   padding: 0 6px;
   overflow-wrap: anywhere;
   transition: opacity 0.22s;
+}
+
+
+
+
+
+.dic-bolha.clara:not(.so-fantasma) .dic-rot {
+  color: var(--ink);
+  text-shadow: none;
 }
 
 .dic-bolha.vazia .dic-rot {
@@ -3138,6 +3158,71 @@ input.filtro-ativo:focus {
   color: var(--brand-ink);
 }
 
+
+
+
+.dic-bloco-detalhe {
+  margin: -4px -8px 0;
+  padding: 10px 8px 2px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background-color: var(--metric);
+}
+
+.dic-bloco-detalhe .dic-secao-lbl:first-child {
+  margin-top: 4px;
+}
+
+
+
+.dic-ajuda {
+  display: inline-grid;
+  place-items: center;
+  width: 15px;
+  height: 15px;
+  margin-left: 6px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background-color: var(--surface);
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1;
+  text-transform: none;
+  color: var(--muted);
+  vertical-align: 1px;
+  cursor: help;
+}
+
+.dic-ajuda:hover,
+.dic-ajuda:focus-visible {
+  border-color: var(--brand);
+  color: var(--brand);
+  outline: none;
+}
+
+.dic-ajuda-balao {
+  position: fixed;
+  z-index: 10020;
+  max-width: 300px;
+  padding: 9px 12px;
+  border-radius: 12px;
+  background-color: var(--tooltip);
+  color: var(--tooltip-ink);
+  font-size: 12.5px;
+  line-height: 1.5;
+  box-shadow: var(--panel-shadow);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.13s;
+}
+
+.dic-ajuda-balao.on {
+  opacity: 1;
+  visibility: visible;
+}
+
  
 .dic-sep {
   border: none;
@@ -4389,4 +4474,131 @@ input.filtro-ativo:focus {
   line-height: 1.6;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
+}
+
+
+
+
+
+
+
+.configs-salvas-barra {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.configs-salvas-combo-slot {
+  display: inline-flex;
+}
+
+.configs-salvas-combo {
+  min-width: 210px;
+}
+
+#dic-controles .configs-salvas-combo .combobox-input {
+  height: 50px;
+  padding: 0 16px;
+  border: 1px solid var(--search-line);
+  border-radius: 18px;
+  background-color: var(--search);
+  box-shadow: var(--search-shadow);
+  backdrop-filter: blur(18px);
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--ink);
+}
+
+#dic-controles .configs-salvas-combo .combobox-input:disabled {
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+.configs-salvas-btn {
+  flex-shrink: 0;
+  height: 50px;
+  padding: 0 18px;
+  border: 1px solid var(--search-line);
+  border-radius: 18px;
+  background-color: var(--search);
+  box-shadow: var(--search-shadow);
+  backdrop-filter: blur(18px);
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--muted);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.configs-salvas-btn:hover:not(:disabled) {
+  color: var(--brand);
+}
+
+.configs-salvas-btn:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+ 
+.configs-salvas-secao + .configs-salvas-secao {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.configs-salvas-campo {
+  margin-bottom: 12px;
+}
+
+.configs-salvas-aviso {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--transferred);
+  margin: 0 0 8px;
+}
+
+.modal-body p.configs-salvas-aviso {
+  color: var(--transferred);
+}
+
+.configs-salvas-confirma {
+  margin-top: -8px;
+  margin-bottom: 20px;
+}
+
+.configs-salvas-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.configs-salvas-card {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 10px 12px;
+  background-color: var(--surface);
+}
+
+.configs-salvas-card-nome {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.configs-salvas-card-resumo {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.configs-salvas-card-acoes,
+.configs-salvas-card .configs-salvas-confirma {
+  margin-bottom: 0;
+}
+
+.configs-salvas-card .configs-salvas-confirma {
+  margin-top: 0;
 }
