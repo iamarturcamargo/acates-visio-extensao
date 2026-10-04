@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<base href="src/app/" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'none'" />
+<meta name="referrer" content="no-referrer" />
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" type="image/png" href="../../icons/icon32.png" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Acates Visio</title>
+<link rel="stylesheet" href="app.css" />
+<link rel="stylesheet" href="mapa.css" />
+</head>
+<body>
+<header class="topbar">
+  <h1>Acates Visio</h1>
+  <nav class="nav">
+    <button id="nav-dicionario" class="nav-btn active" type="button">Quadro Geral</button>
+    <button id="nav-mapa" class="nav-btn" type="button">Mapa</button>
+  </nav>
+  <button id="btn-open-config" class="icon-btn" type="button" title="Configurações" aria-label="Configurações">⚙</button>
+</header>
+
+<main>
+  
+
+
+  <section id="screen-dicionario" class="screen">
+    <div id="dic-mapa"><div id="dic-mundo"></div></div>
+
+    <div id="dic-busca-cx">
+      <div id="dic-busca-card">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8a919e" stroke-width="2" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" />
+        </svg>
+        <input id="dic-busca" type="text" placeholder="Buscar erro, processo ou trecho" autocomplete="off" />
+        <button id="dic-busca-limpar" class="hidden" type="button" title="Limpar">×</button>
+      </div>
+      <div id="dic-sug" class="hidden"></div>
+    </div>
+
+    <div id="dic-controles">
+      <button id="dic-btn-filtros" type="button">Configurações</button>
+      
+      <button id="dic-btn-ocultos" class="hidden" type="button">0 omitidos</button>
+      
+      <button id="dic-btn-removidos" class="hidden" type="button">0 removidos</button>
+      <button id="dic-btn-exportar" type="button" title="Salvar em Excel o que está sendo mostrado">Exportar</button>
+      <button id="dic-btn-reler" type="button" title="Reler os arquivos da pasta" aria-label="Reler os arquivos da pasta">⟳</button>
+      
+      <button id="dic-btn-dicionario" type="button">Dicionário: Oficial</button>
+    </div>
+    <div id="dic-painel-filtros" class="hidden"></div>
+    <div id="dic-painel-ocultos" class="hidden"></div>
+    <div id="dic-painel-removidos" class="hidden"></div>
+
+    <div id="dic-zoom">
+      <button id="dic-zoom-mais" type="button" title="Aproximar">+</button>
+      <button id="dic-zoom-menos" type="button" title="Afastar">−</button>
+    </div>
+
+    <aside id="dic-ficha"></aside>
+    <div id="dic-dica"></div>
+    <button id="dic-flut" class="hidden" type="button"></button>
+  </section>
+
+  
+
+
+
+
+
+  <section id="screen-mapa" class="screen hidden">
+    <div class="map-bg"></div>
+    <svg id="map" viewBox="0 0 1000 650" role="img" aria-label="Mapa judiciário do estado de São Paulo"><g id="viewport"><g id="regions"></g><path id="boundaries" class="region-boundary"></path><path id="city-skeleton" class="city-skeleton"></path><g id="labels"></g><path id="outline" class="state-outline"></path></g></svg>
+
+    <div class="search-wrap">
+      <div class="search-row">
+        <div class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+          <input id="search" autocomplete="off" placeholder="Buscar cidade, comarca, circunscrição ou RAJ">
+        </div>
+        <button id="color-settings-button" class="map-filter-button" aria-label="Abrir configurações do mapa" aria-expanded="false">Configurações</button>
+        <button id="sem-local-button" class="map-filter-button" aria-label="Inconsistências" aria-expanded="false">Inconsistências</button>
+      </div>
+      <div id="results" class="results" hidden></div>
+
+      <section id="color-popover" class="color-popover" aria-label="Configurações do mapa" hidden>
+        <h2>Configurações do mapa</h2>
+        <p>O mapa e os totais são recalculados conforme você escolhe.</p>
+        <div class="filter-group">
+          <p class="filter-group-title">Resultado da migração</p>
+          <div class="color-row"><label><input class="metric-check" data-status-filter="0" type="checkbox" checked><span>Ag. Migração</span></label><input data-color="0" type="color" aria-label="Cor de aguarda migração"></div>
+          <div class="color-row"><label><input class="metric-check" data-status-filter="1" type="checkbox" checked><span>Falha na migração</span></label><input data-color="1" type="color" aria-label="Cor de falha na migração"></div>
+          <div class="color-row"><label><input class="metric-check" data-status-filter="2" type="checkbox" checked><span>Migrado</span></label><input data-color="2" type="color" aria-label="Cor de migrado"></div>
+          <div class="color-row"><label><input class="metric-check" data-status-filter="3" type="checkbox" checked><span>Implantado</span></label><input data-color="3" type="color" aria-label="Cor de implantado"></div>
+          <div class="color-row"><label><input class="metric-check" data-status-filter="4" type="checkbox" checked><span>Nascido no SEEU</span></label><input data-color="4" type="color" aria-label="Cor de nascido no SEEU"></div>
+          <div class="color-row"><label><input class="metric-check" data-status-filter="5" type="checkbox" checked><span>Transferido de outro Tribunal</span></label><input data-color="5" type="color" aria-label="Cor de transferido de outro tribunal"></div>
+        </div>
+        <div class="filter-group">
+          <p class="filter-group-title">Situação do processo</p>
+          <div id="situacao-filtros"></div>
+        </div>
+        <div class="filter-group">
+          <p class="filter-group-title">Na lista de processos</p>
+          <label class="metric-row"><input class="metric-check" data-campo-lista="vara" type="checkbox"><span>Vara</span></label>
+          <label class="metric-row"><input class="metric-check" data-campo-lista="comarca" type="checkbox"><span>Comarca</span></label>
+          <p id="aviso-vara" class="trail hidden"></p>
+        </div>
+        <div class="filter-group">
+          <p class="filter-group-title">Rótulos</p>
+          <label class="gradient-toggle"><span>Total na região<small>Mostra o total sob o nome de cada região</small></span><input id="total-rotulos-toggle" type="checkbox" aria-label="Mostrar o total sob o rótulo de cada região"></label>
+        </div>
+        <div class="filter-group">
+          <p class="filter-group-title">Preenchimento</p>
+          <label class="gradient-toggle"><span>Gradiente proporcional<small>Mistura as cores conforme as quantidades</small></span><input id="gradient-toggle" type="checkbox" aria-label="Usar gradiente proporcional"></label>
+        </div>
+        <button id="color-reset" class="color-reset">Restaurar padrão</button>
+      </section>
+
+      
+
+      <section id="sem-local-popover" class="color-popover" aria-label="Inconsistências" hidden>
+        <h2>Inconsistências</h2>
+        <p>Processos que a extensão conhece mas não consegue localizar. Eles entram nos totais, mas não pintam região nenhuma.</p>
+        <div class="filter-group">
+          <p class="filter-group-title" id="sem-local-migrados">— processos migrados sem local de tramitação</p>
+          <p class="filter-group-title" id="sem-local-implantados">— processos implantados sem local de tramitação</p>
+        </div>
+        <p id="sem-local-fonte"></p>
+        <button id="sem-local-exportar" class="color-reset">Exportar inconsistências</button>
+      </section>
+    </div>
+
+    <div class="legend" aria-label="Legenda e configurações do mapa">
+      <button data-status="0"><i class="dot pending"></i><span>Ag. Migração</span></button>
+      <button data-status="1"><i class="dot error"></i><span>Falha na migração</span></button>
+      <button data-status="2"><i class="dot success"></i><span>Migrado</span></button>
+      <button data-status="3"><i class="dot deployed"></i><span>Implantado</span></button>
+      <button data-status="4"><i class="dot native"></i><span>Nascido no SEEU</span></button>
+      <button data-status="5"><i class="dot transferred"></i><span>Transferido de outro Tribunal</span></button>
+    </div>
+
+    <div class="zoom">
+      <button id="zoom-in" aria-label="Aproximar">+</button>
+      <button id="zoom-out" aria-label="Afastar">−</button>
+    </div>
+
+    <div id="tooltip" class="tooltip" hidden></div>
+
+    <aside id="panel" class="panel" aria-live="polite">
+      <div class="panel-head">
+        <button id="close" class="panel-close" aria-label="Fechar">×</button>
+        <div class="eyebrow" id="panel-level">RAJ</div>
+        <h2 id="panel-title"></h2>
+        <div id="trail" class="trail"></div>
+        <div id="unit-filter" class="unit-filter" hidden><span>Unidade</span><label><input data-unit-filter="deecrim" type="checkbox" checked>DEECRIM</label><label><input data-unit-filter="vec" type="checkbox" checked>VECs</label></div>
+        <div id="metrics" class="metrics"></div>
+        <div id="bar" class="bar"></div>
+        <div class="panel-actions"><button id="deeper" class="primary">Aproximar região</button><button id="export">Exportar recorte</button></div>
+      </div>
+      <div id="tabs" class="process-tabs"></div>
+      <div id="processes" class="processes"></div>
+    </aside>
+  </section>
+</main>
+
+<div id="config-modal-overlay" class="modal-overlay hidden">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="config-modal-title">
+    <div class="modal-header">
+      <h2 id="config-modal-title">Configurações</h2>
+      <button id="config-modal-close" class="modal-close-btn" type="button" title="Fechar" aria-label="Fechar">×</button>
+    </div>
+    <div class="modal-body">
+      <h3>Desempenho</h3>
+      <label class="config-toggle">
+        <span>Otimizar renderização do mapa<small>Simplifica o desenho enquanto você arrasta ou dá zoom, e devolve o detalhe cheio ao soltar. Desligue se preferir o mapa sempre no traço final, mesmo que o movimento fique pesado em máquina mais modesta.</small></span>
+        <input id="config-otimizar-mapa" type="checkbox" aria-label="Otimizar a renderização do mapa durante arrasto e zoom">
+      </label>
+
+      <h3>Pasta de trabalho</h3>
+      <p id="config-folder-name">Nenhuma pasta selecionada.</p>
+      <div class="config-actions">
+        <button id="btn-pick-folder" type="button">Escolher pasta</button>
+        <button id="btn-request-permission" type="button" class="hidden">Reconceder acesso</button>
+        <button id="btn-sync" type="button" disabled>Sincronizar</button>
+      </div>
+      <div id="sync-results" class="sync-results"></div>
+
+      <h3>Pacote da equipe</h3>
+      <p id="config-pacote-status">Escolha a pasta de trabalho primeiro.</p>
+      <div class="config-actions">
+        <button id="btn-importar-pacote" type="button" disabled>Importar pacote .zip</button>
+      </div>
+      <p class="field-hint">
+        O <code>.zip</code> que a ACATES gera com tudo de uma vez: lotes, logs, acervo do SAJ,
+        retrato do SEEU, planilha de implantados, metadata e dicionário de erros. A extensão
+        desempacota cada arquivo na pasta certa dentro da pasta de trabalho — o mesmo que
+        descompactar e colar à mão, que continua valendo. <strong>Nada é apagado</strong>:
+        arquivo que já estava na pasta com conteúdo diferente fica intocado e o do pacote entra
+        ao lado, com sufixo. O metadata e o dicionário do pacote passam a valer, e os anteriores
+        ficam guardados na pasta como cópia (<code>…__antes-do-pacote__…</code>).
+      </p>
+
+      <h3>Dicionário de erros</h3>
+      <p id="config-dicionario-status">Escolha a pasta de trabalho primeiro.</p>
+      <div id="config-dicionario-combo" class="config-dicionario-combo"></div>
+      <div class="config-dicionario-linha">
+        <input id="config-dic-apelido" class="field-input" type="text" placeholder="Nome da cópia nova" autocomplete="off" />
+        <div class="config-actions">
+          <button id="btn-dic-copiar" type="button" disabled>Criar cópia do que está em uso</button>
+        </div>
+      </div>
+      <p class="field-hint">
+        O <strong>oficial</strong> é o dicionário que vem no pacote da equipe, e a extensão nunca
+        o altera. Para mudar alguma coisa, trabalhe numa <strong>cópia</strong>: ao fazer a
+        primeira alteração no Quadro Geral com o oficial em uso, a extensão já pede o nome da
+        cópia. Cada cópia é um arquivo na pasta de trabalho
+        (<code>.dicionario_erros.&lt;nome&gt;.json</code>); a escolha de qual usar vale só neste
+        navegador. Nenhum dicionário é apagado pela extensão.
+      </p>
+
+      <h3>Planilhas</h3>
+      <p id="config-planilhas-status">Escolha a pasta de trabalho primeiro.</p>
+      <div id="config-planilhas-lotes" class="config-planilhas-lotes"></div>
+      <div class="config-actions">
+        <button id="btn-gerar-sucesso" type="button" disabled>Gerar sucesso</button>
+        <button id="btn-gerar-erros" type="button" disabled>Gerar erros</button>
+      </div>
+      <p class="field-hint">
+        Gera a planilha de sucesso ou de erros de um ou mais lotes já baixados (precisa do arquivo
+        do lote e do log de erros na pasta). Escolha os lotes no campo acima —
+        <strong>deixar vazio gera para todos os lotes prontos</strong>, não para nenhum.
+      </p>
+
+      <h3>Aguarda migração</h3>
+      <p id="config-aguarda-status">Nenhum acervo carregado.</p>
+      <div class="config-actions">
+        <button id="btn-importar-parquet" type="button" disabled>Importar .parquet ou pacote .zip</button>
+      </div>
+      <p class="field-hint">
+        O acervo que ainda não foi submetido ao migrador, num arquivo <code>.parquet</code>.
+        Importar copia o arquivo para <code>dados_saj/</code> dentro da pasta de trabalho;
+        vale sempre o mais recente. Nenhum arquivo anterior é apagado.
+      </p>
+
+      <h3>Local de tramitação (SEEU)</h3>
+      <p id="config-local-status">Nenhum retrato carregado.</p>
+      <div class="config-actions">
+        <button id="btn-importar-local" type="button" disabled>Importar .parquet ou pacote .zip</button>
+      </div>
+      <p class="field-hint">
+        O retrato de <strong>onde cada processo está hoje no SEEU</strong>, num arquivo
+        <code>.parquet</code>. É o que permite ao <strong>Mapa Judiciário</strong> saber a comarca
+        dos processos já migrados — o arquivo do lote e o log de erros não trazem
+        campo geográfico nenhum. Importar copia o arquivo para <code>dados_seeu/</code>
+        dentro da pasta de trabalho; vale sempre o mais recente. Nenhum arquivo
+        anterior é apagado. A extensão lê só quatro colunas dele (número, foro,
+        vara e situação) e ignora todo o resto.
+      </p>
+
+      <h3>Implantados</h3>
+      <p id="config-implantados-status">Nenhuma planilha carregada.</p>
+      <div class="config-actions">
+        <button id="btn-importar-implantados" type="button" disabled>Importar planilha</button>
+      </div>
+      <p class="field-hint">
+        A planilha da força-tarefa de conferência (<code>.xlsm</code> ou <code>.xlsx</code>).
+        Vale a aba <code>baseProcessos</code>: a extensão lê a <strong>coluna C</strong>
+        (número do processo) e a <strong>coluna H</strong> (conferência), e conta como
+        implantado quem estiver com <code>Sim</code>. Nada mais da planilha é usado.
+        Importar copia o arquivo para <code>implantados/</code> na pasta de trabalho;
+        vale sempre o mais recente. Nenhum arquivo anterior é apagado.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div id="onboarding-overlay" class="modal-overlay onboarding-overlay hidden">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="onboarding-title">
+    <div class="modal-body onboarding-body">
+      <div class="onboarding-icone" aria-hidden="true">📁</div>
+      <h2 id="onboarding-title">Escolha a pasta de trabalho</h2>
+      <p id="onboarding-texto"></p>
+      <p id="onboarding-detalhe" class="onboarding-detalhe hidden"></p>
+      <input id="onboarding-nome" type="text" class="onboarding-nome hidden" placeholder="Seu nome" autocomplete="off" />
+      <button id="onboarding-acao" type="button">Escolher pasta</button>
+      <p class="onboarding-rodape">
+        O Acates Visio só lê os arquivos da sua pasta e nunca apaga nada nela.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div id="gerar-planilhas-overlay" class="modal-overlay hidden">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="gerar-planilhas-title">
+    <div class="modal-header">
+      <h2 id="gerar-planilhas-title">Gerar planilhas</h2>
+      <button id="gerar-planilhas-close" class="modal-close-btn" type="button" title="Fechar" aria-label="Fechar">×</button>
+    </div>
+    <div class="modal-body">
+      <div id="gerar-planilhas-corpo"></div>
+      <div class="config-actions">
+        <button id="gerar-planilhas-acao" type="button">Gerar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div id="export-recorte-overlay" class="modal-overlay hidden">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="export-recorte-title">
+    <div class="modal-header">
+      <h2 id="export-recorte-title">Exportar recorte</h2>
+      <button id="export-recorte-close" class="modal-close-btn" type="button" title="Fechar" aria-label="Fechar">×</button>
+    </div>
+    <div class="modal-body">
+      <p id="export-recorte-intro"></p>
+      <div id="export-recorte-lista" class="export-lista"></div>
+      <p id="export-recorte-aviso" class="modal-hint"></p>
+      <div class="config-actions">
+        <button id="export-recorte-acao" type="button">Exportar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="configs-salvas-overlay" class="modal-overlay hidden">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="configs-salvas-title">
+    <div class="modal-header">
+      <h2 id="configs-salvas-title">Configurações salvas</h2>
+      <button id="configs-salvas-close" class="modal-close-btn" type="button" title="Fechar" aria-label="Fechar">×</button>
+    </div>
+    <div class="modal-body">
+      <div id="configs-salvas-corpo"></div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div id="proc-overlay" class="modal-overlay hidden">
+  <div class="modal modal-processo" role="dialog" aria-modal="true" aria-labelledby="proc-numero">
+    <div class="modal-header proc-header">
+      <div class="proc-head-txt">
+        <div class="proc-eyebrow-linha">
+          <span class="proc-eyebrow">Processo</span>
+          <span id="proc-badge" class="badge"></span>
+        </div>
+        <h2 id="proc-numero"></h2>
+        <div id="proc-trilha" class="proc-trilha"></div>
+      </div>
+      <div class="proc-head-acoes">
+        <button id="proc-copiar" class="proc-icone" type="button" title="Copiar o número" aria-label="Copiar o número">⧉</button>
+        <button id="proc-fechar" class="modal-close-btn" type="button" title="Fechar" aria-label="Fechar">×</button>
+      </div>
+    </div>
+    <div class="modal-body" id="proc-corpo"></div>
+  </div>
+</div>
+
+<div id="busy-overlay" class="busy-overlay hidden">
+  <div class="spinner"></div>
+  <span id="busy-label"></span>
+  <button id="busy-cancel" class="busy-cancel hidden" type="button">Cancelar</button>
+</div>
+<div id="toast-container" class="toast-container"></div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
