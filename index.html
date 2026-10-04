@@ -123,7 +123,6 @@
 
       <section id="sem-local-popover" class="color-popover" aria-label="Inconsistências" hidden>
         <h2>Inconsistências</h2>
-        <p>Processos que a extensão conhece mas não consegue localizar. Eles entram nos totais, mas não pintam região nenhuma.</p>
         <div class="filter-group">
           <p class="filter-group-title" id="sem-local-migrados">— processos migrados sem local de tramitação</p>
           <p class="filter-group-title" id="sem-local-implantados">— processos implantados sem local de tramitação</p>
@@ -175,7 +174,8 @@
     <div class="modal-body">
       <h3>Desempenho</h3>
       <label class="config-toggle">
-        <span>Otimizar renderização do mapa<small>Simplifica o desenho enquanto você arrasta ou dá zoom, e devolve o detalhe cheio ao soltar. Desligue se preferir o mapa sempre no traço final, mesmo que o movimento fique pesado em máquina mais modesta.</small></span>
+        <span>Otimizar renderização do mapa</span>
+        <span class="ajuda" data-ajuda="Simplifica o desenho enquanto você arrasta ou dá zoom, e devolve o detalhe cheio ao soltar. Desligue se preferir o mapa sempre no traço final, mesmo que o movimento fique pesado em máquina mais modesta."></span>
         <input id="config-otimizar-mapa" type="checkbox" aria-label="Otimizar a renderização do mapa durante arrasto e zoom">
       </label>
 
@@ -188,22 +188,13 @@
       </div>
       <div id="sync-results" class="sync-results"></div>
 
-      <h3>Pacote da equipe</h3>
+      <h3>Pacote da equipe<span class="ajuda" data-ajuda="O .zip que a ACATES gera com tudo de uma vez: lotes, logs, acervo do SAJ, retrato do SEEU, planilha de implantados, metadata e dicionário de erros. A extensão desempacota cada arquivo na pasta certa dentro da pasta de trabalho — o mesmo que descompactar e colar à mão, que continua valendo. Nada é apagado: arquivo que já estava na pasta com conteúdo diferente fica intocado e o do pacote entra ao lado, com sufixo. O metadata e o dicionário do pacote passam a valer, e os anteriores ficam guardados na pasta como cópia (…__antes-do-pacote__…)."></span></h3>
       <p id="config-pacote-status">Escolha a pasta de trabalho primeiro.</p>
       <div class="config-actions">
         <button id="btn-importar-pacote" type="button" disabled>Importar pacote .zip</button>
       </div>
-      <p class="field-hint">
-        O <code>.zip</code> que a ACATES gera com tudo de uma vez: lotes, logs, acervo do SAJ,
-        retrato do SEEU, planilha de implantados, metadata e dicionário de erros. A extensão
-        desempacota cada arquivo na pasta certa dentro da pasta de trabalho — o mesmo que
-        descompactar e colar à mão, que continua valendo. <strong>Nada é apagado</strong>:
-        arquivo que já estava na pasta com conteúdo diferente fica intocado e o do pacote entra
-        ao lado, com sufixo. O metadata e o dicionário do pacote passam a valer, e os anteriores
-        ficam guardados na pasta como cópia (<code>…__antes-do-pacote__…</code>).
-      </p>
 
-      <h3>Dicionário de erros</h3>
+      <h3>Dicionário de erros<span class="ajuda" data-ajuda="O oficial é o dicionário que vem no pacote da equipe, e a extensão nunca o altera. Para mudar alguma coisa, trabalhe numa cópia: ao fazer a primeira alteração no Quadro Geral com o oficial em uso, a extensão já pede o nome da cópia. Cada cópia é um arquivo na pasta de trabalho (.dicionario_erros.&lt;nome&gt;.json); a escolha de qual usar vale só neste navegador. Nenhum dicionário é apagado pela extensão."></span></h3>
       <p id="config-dicionario-status">Escolha a pasta de trabalho primeiro.</p>
       <div id="config-dicionario-combo" class="config-dicionario-combo"></div>
       <div class="config-dicionario-linha">
@@ -212,67 +203,32 @@
           <button id="btn-dic-copiar" type="button" disabled>Criar cópia do que está em uso</button>
         </div>
       </div>
-      <p class="field-hint">
-        O <strong>oficial</strong> é o dicionário que vem no pacote da equipe, e a extensão nunca
-        o altera. Para mudar alguma coisa, trabalhe numa <strong>cópia</strong>: ao fazer a
-        primeira alteração no Quadro Geral com o oficial em uso, a extensão já pede o nome da
-        cópia. Cada cópia é um arquivo na pasta de trabalho
-        (<code>.dicionario_erros.&lt;nome&gt;.json</code>); a escolha de qual usar vale só neste
-        navegador. Nenhum dicionário é apagado pela extensão.
-      </p>
 
-      <h3>Planilhas</h3>
+      <h3>Planilhas<span class="ajuda" data-ajuda="Gera a planilha de sucesso ou de erros de um ou mais lotes já baixados (precisa do arquivo do lote e do log de erros na pasta). Escolha os lotes no campo acima — deixar vazio gera para todos os lotes prontos, não para nenhum."></span></h3>
       <p id="config-planilhas-status">Escolha a pasta de trabalho primeiro.</p>
       <div id="config-planilhas-lotes" class="config-planilhas-lotes"></div>
       <div class="config-actions">
         <button id="btn-gerar-sucesso" type="button" disabled>Gerar sucesso</button>
         <button id="btn-gerar-erros" type="button" disabled>Gerar erros</button>
       </div>
-      <p class="field-hint">
-        Gera a planilha de sucesso ou de erros de um ou mais lotes já baixados (precisa do arquivo
-        do lote e do log de erros na pasta). Escolha os lotes no campo acima —
-        <strong>deixar vazio gera para todos os lotes prontos</strong>, não para nenhum.
-      </p>
 
-      <h3>Aguarda migração</h3>
+      <h3>Aguarda migração<span class="ajuda" data-ajuda="O acervo que ainda não foi submetido ao migrador, num arquivo .parquet. Importar copia o arquivo para dados_saj/ dentro da pasta de trabalho; vale sempre o mais recente. Nenhum arquivo anterior é apagado."></span></h3>
       <p id="config-aguarda-status">Nenhum acervo carregado.</p>
       <div class="config-actions">
         <button id="btn-importar-parquet" type="button" disabled>Importar .parquet ou pacote .zip</button>
       </div>
-      <p class="field-hint">
-        O acervo que ainda não foi submetido ao migrador, num arquivo <code>.parquet</code>.
-        Importar copia o arquivo para <code>dados_saj/</code> dentro da pasta de trabalho;
-        vale sempre o mais recente. Nenhum arquivo anterior é apagado.
-      </p>
 
-      <h3>Local de tramitação (SEEU)</h3>
+      <h3>Local de tramitação (SEEU)<span class="ajuda" data-ajuda="O retrato de onde cada processo está hoje no SEEU, num arquivo .parquet. É o que permite ao Mapa Judiciário saber a comarca dos processos já migrados — o arquivo do lote e o log de erros não trazem campo geográfico nenhum. Importar copia o arquivo para dados_seeu/ dentro da pasta de trabalho; vale sempre o mais recente. Nenhum arquivo anterior é apagado. A extensão lê só quatro colunas dele (número, foro, vara e situação) e ignora todo o resto."></span></h3>
       <p id="config-local-status">Nenhum retrato carregado.</p>
       <div class="config-actions">
         <button id="btn-importar-local" type="button" disabled>Importar .parquet ou pacote .zip</button>
       </div>
-      <p class="field-hint">
-        O retrato de <strong>onde cada processo está hoje no SEEU</strong>, num arquivo
-        <code>.parquet</code>. É o que permite ao <strong>Mapa Judiciário</strong> saber a comarca
-        dos processos já migrados — o arquivo do lote e o log de erros não trazem
-        campo geográfico nenhum. Importar copia o arquivo para <code>dados_seeu/</code>
-        dentro da pasta de trabalho; vale sempre o mais recente. Nenhum arquivo
-        anterior é apagado. A extensão lê só quatro colunas dele (número, foro,
-        vara e situação) e ignora todo o resto.
-      </p>
 
-      <h3>Implantados</h3>
+      <h3>Implantados<span class="ajuda" data-ajuda="A planilha da força-tarefa de conferência (.xlsm ou .xlsx). Vale a aba baseProcessos: a extensão lê a coluna C (número do processo) e a coluna H (conferência), e conta como implantado quem estiver com Sim. Nada mais da planilha é usado. Importar copia o arquivo para implantados/ na pasta de trabalho; vale sempre o mais recente. Nenhum arquivo anterior é apagado."></span></h3>
       <p id="config-implantados-status">Nenhuma planilha carregada.</p>
       <div class="config-actions">
         <button id="btn-importar-implantados" type="button" disabled>Importar planilha</button>
       </div>
-      <p class="field-hint">
-        A planilha da força-tarefa de conferência (<code>.xlsm</code> ou <code>.xlsx</code>).
-        Vale a aba <code>baseProcessos</code>: a extensão lê a <strong>coluna C</strong>
-        (número do processo) e a <strong>coluna H</strong> (conferência), e conta como
-        implantado quem estiver com <code>Sim</code>. Nada mais da planilha é usado.
-        Importar copia o arquivo para <code>implantados/</code> na pasta de trabalho;
-        vale sempre o mais recente. Nenhum arquivo anterior é apagado.
-      </p>
     </div>
   </div>
 </div>
@@ -286,7 +242,6 @@
       <div class="onboarding-icone" aria-hidden="true">📁</div>
       <h2 id="onboarding-title">Escolha a pasta de trabalho</h2>
       <p id="onboarding-texto"></p>
-      <p id="onboarding-detalhe" class="onboarding-detalhe hidden"></p>
       <input id="onboarding-nome" type="text" class="onboarding-nome hidden" placeholder="Seu nome" autocomplete="off" />
       <button id="onboarding-acao" type="button">Escolher pasta</button>
       <p class="onboarding-rodape">
