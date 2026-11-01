@@ -1940,7 +1940,8 @@ input.filtro-ativo:focus {
   position: absolute;
   left: 388px;
   top: 20px;
-  z-index: 40;
+   
+  z-index: 46;
 }
 
 #dic-btn-filtros {
@@ -1967,6 +1968,7 @@ input.filtro-ativo:focus {
   font-weight: 600;
 }
 
+#dic-painel-recorte,
 #dic-painel-filtros {
   position: absolute;
   left: 388px;
@@ -3111,6 +3113,21 @@ input.filtro-ativo:focus {
 
 .dic-check input {
   cursor: pointer;
+}
+
+
+
+
+
+.modal-body .dic-exportar-total {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+
+.dic-exportar-coluna {
+  margin-bottom: 12px;
 }
 
 
@@ -4494,62 +4511,154 @@ input.filtro-ativo:focus {
 
 
 
-.configs-salvas-barra {
+
+
+.configs-salvas-dividido {
+  position: relative;
   display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.configs-salvas-combo-slot {
-  display: inline-flex;
-}
-
-.configs-salvas-combo {
-  min-width: 210px;
-}
-
-#dic-controles .configs-salvas-combo .combobox-input {
-  height: 50px;
-  padding: 0 16px;
-  border: 1px solid var(--search-line);
-  border-radius: 18px;
-  background-color: var(--search);
-  box-shadow: var(--search-shadow);
-  backdrop-filter: blur(18px);
-  font-family: inherit;
-  font-size: 14px;
-  color: var(--ink);
-}
-
-#dic-controles .configs-salvas-combo .combobox-input:disabled {
-  color: var(--muted);
-  cursor: not-allowed;
-}
-
-.configs-salvas-btn {
+  align-items: stretch;
   flex-shrink: 0;
   height: 50px;
-  padding: 0 18px;
   border: 1px solid var(--search-line);
   border-radius: 18px;
   background-color: var(--search);
   box-shadow: var(--search-shadow);
   backdrop-filter: blur(18px);
+}
+
+.configs-salvas-principal,
+.configs-salvas-seta {
+  border: none;
+  background-color: transparent;
   font-family: inherit;
   font-size: 14px;
   color: var(--muted);
-  white-space: nowrap;
   cursor: pointer;
   transition: color 0.2s;
 }
 
-.configs-salvas-btn:hover:not(:disabled) {
+.configs-salvas-principal {
+  max-width: 280px;
+  padding: 0 14px 0 18px;
+  border-radius: 18px 0 0 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.configs-salvas-seta {
+  padding: 0 12px;
+  border-left: 1px solid var(--line);
+  border-radius: 0 18px 18px 0;
+}
+
+.configs-salvas-principal:hover,
+.configs-salvas-seta:hover,
+.configs-salvas-dividido.aberto .configs-salvas-seta {
   color: var(--brand);
 }
 
-.configs-salvas-btn:disabled {
+.configs-salvas-dividido.aberto .configs-salvas-seta {
+  background-color: var(--hover);
+}
+
+.configs-salvas-dividido.ativo .configs-salvas-principal {
+  color: var(--brand);
+  font-weight: 600;
+}
+
+
+
+.configs-salvas-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 5;
+  min-width: 280px;
+  max-width: 380px;
+  padding: 6px;
+  border: 1px solid var(--panel-line);
+  border-radius: 16px;
+  background-color: var(--panel);
+  box-shadow: var(--panel-shadow);
+  backdrop-filter: blur(24px);
+}
+
+.configs-salvas-lista {
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.configs-salvas-vazio {
+  padding: 10px 12px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.configs-salvas-item,
+.configs-salvas-acao {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 9px 12px;
+  border: none;
+  border-radius: 11px;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.configs-salvas-item:hover:not(:disabled),
+.configs-salvas-acao:hover:not(:disabled) {
+  background-color: var(--hover);
+}
+
+.configs-salvas-item.ativo {
+  color: var(--brand);
+  font-weight: 600;
+  background-color: var(--brand-soft);
+}
+
+.configs-salvas-item-nome {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.configs-salvas-acao:disabled {
   cursor: default;
-  opacity: 0.55;
+}
+
+.configs-salvas-menu-sep {
+  margin: 6px 4px;
+  border-top: 1px solid var(--line);
+}
+
+.configs-salvas-etiqueta {
+  flex-shrink: 0;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background-color: var(--metric);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.configs-salvas-card-topo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.configs-salvas-card-topo .configs-salvas-card-nome {
+  margin-bottom: 0;
 }
 
  
@@ -4664,4 +4773,143 @@ input.filtro-ativo:focus {
 
 .config-dicionario-linha button {
   margin: 0;
+}
+
+
+
+
+
+
+.dic-bf {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dic-bf-campo {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--ink);
+  background-color: var(--surface);
+}
+
+.dic-bf-campo::placeholder {
+  color: var(--muted);
+}
+
+.dic-bf-campo:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 2px var(--brand-soft);
+}
+
+ 
+.dic-bf-lista {
+  max-height: 260px;
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background-color: var(--surface);
+}
+
+.dic-bf-lista[hidden] {
+  display: none;
+}
+
+
+
+
+.dic-sug-i.dic-sug-ativo,
+.dic-bf-lista .dic-sug-i:hover {
+  background-color: var(--hover);
+}
+
+ 
+.dic-bf-acao {
+  flex: 0 0 auto;
+  padding: 2px 9px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--muted);
+  background-color: var(--surface);
+}
+
+ 
+.dic-bf-acao-apenas {
+  border-color: transparent;
+  font-weight: 600;
+  color: var(--brand);
+  background-color: var(--brand-soft);
+}
+
+ 
+.dic-sug-i .tx b mark {
+  background-color: var(--transferred-soft);
+  color: inherit;
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+ 
+
+ 
+.dic-nota.dic-nota-detalhar {
+  margin: 8px 0 0;
+}
+
+ 
+.dic-btn-esquema {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background-color: var(--surface);
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.dic-btn-esquema svg {
+  flex-shrink: 0;
+}
+
+.dic-btn-esquema:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+
+ 
+.modal.modal-esquema-cores {
+  max-width: 420px;
+}
+
+ 
+.modal.modal-confirmar-descarte {
+  max-width: 420px;
+}
+
+.modal-body p.modal-confirmar-descarte-texto {
+  margin-bottom: 18px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.modal-confirmar-descarte .config-actions {
+  margin-bottom: 0;
+  justify-content: flex-end;
 }
